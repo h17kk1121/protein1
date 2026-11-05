@@ -68,3 +68,86 @@ display:none;
 .protein2 {
   display: none;
 }
+
+.par { 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.parx {
+  width: 500px;
+  height: 30px;
+
+  background-color: white;
+  border: 1px solid black;
+}
+.par1{
+    width: 50px;
+    height: 30px;
+    background-color: #4caf50;
+  }
+  .par2{
+    width: 100px;
+    height: 30px;
+    background-color: #4caf50;
+  }
+  .par3{
+    width: 150px;
+    height: 30px;
+    background-color: #4caf50;
+  }
+  .par4{
+    width: 200px;
+    height: 30px;
+    background-color: #4caf50;
+  }
+  .par5{
+    width: 250px;
+    height: 30px;
+    background-color: #4caf50;
+  }
+  .par6{
+    width: 300px;
+    height: 30px;
+    background-color: #4caf50;
+  }
+  .par7{
+    width: 350px;
+    height: 30px;
+    background-color: #4caf50;
+  }
+  .par8{
+    width: 400px;
+    height: 30px;
+    background-color: #4caf50;
+  } 
+  .par9{
+    width: 450px;
+    height: 30px;
+    background-color: #4caf50;
+  }
+  .par10{
+    width: 475px;
+    height: 30px;
+    background-color: #4caf50;
+  }
+  .par11{
+    width: 500px;
+    height: 30px;
+    background-color: #4caf50;
+  }
+  .par12{
+    width: 500px;
+    height: 30px;
+    background-color: #a6ff00;
+}
+.par13{
+    width: 500px;
+    height: 30px;
+    background-color: #ff0000;
+}
+.par1, .par2, .par3, .par4, .par5, .par6,
+.par7, .par8, .par9, .par10, .par11, .par12, .par13 {
+  transition: width 0.5s ease-in-out;
+}
