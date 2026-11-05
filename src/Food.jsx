@@ -5,7 +5,7 @@ function Food({ math, setmath, anytime, setanytime, eat, seteat }) {
   const [real2, setreal2] = useState(false);
   const [selectMenu, setselectMenu] = useState(null);
   const [selectMenu2, setselectMenu2] = useState(null);
-  const [goal, setgoal] = useState('');
+  const [goal, setgoal] = useState(0);
   const [goal2, setgoal2] = useState(false);
   const [randomFoods, setrandomFoods] = useState([]);
 
@@ -13,6 +13,9 @@ const [protein2, setprotein2] = useState('');
 const [proteinClass, setproteinClass] = useState(false);
 const [oil, setoil] = useState(false);
 const protein3=anytime.map((menu)=>menu.proteinCount);
+const par=math
+          .filter((menu) => menu.check)
+          .reduce((total, menu) => total + Number(menu.count), 0)
 
   return (
     <div>
@@ -138,11 +141,7 @@ setprotein2('');
       ))}
 
       <p>
-        合計：
-        {math
-          .filter((menu) => menu.check)
-          .reduce((total, menu) => total + Number(menu.count), 0)}
-          
+        合計：{par}
       </p>
        <p>
   プロテイン：
@@ -151,6 +150,29 @@ setprotein2('');
     .reduce((total, current) => total + Number(current.proteinCount), 0)}
   g
 </p>
+
+
+
+
+  <div className="par">
+    <div className="parx">
+  <div className={
+  par === 0 || goal === 0 ? '' :
+  par / goal <= 0.1 ? 'par1' :
+  par / goal <= 0.2 ? 'par2' :
+  par / goal <= 0.3 ? 'par3' :
+  par / goal <= 0.4 ? 'par4' :
+  par / goal <= 0.5 ? 'par5' :
+  par / goal <= 0.6 ? 'par6' :
+  par / goal <= 0.7 ? 'par7' :
+  par / goal <= 0.8 ? 'par8' :
+  par / goal <= 0.9 ? 'par9' :
+  par / goal < 1 ? 'par10' :
+  par / goal === 1 ? 'par11' :
+  par / goal <= 1.1 ? 'par12':
+  par / goal > 1.2 && 'par13'
+}>
+</div></div></div>
       {math
         .filter((menu) => menu.check)
         .reduce((total, menu) => total + Number(menu.count), 0) >= goal
@@ -299,6 +321,8 @@ setprotein2('');
    {randomFoods.map((menu, index) => (
   <div key={index}>
     <p>{menu.name}: {menu.count}</p>
+  <p>プロテイン: {menu.proteinCount}g</p>
+
  
   </div>
 ))}
