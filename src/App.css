@@ -1,0 +1,70 @@
+.goal{
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    align-items:center;
+    background-color:#00000080;
+justify-content:center;
+    display:flex;
+    position:fixed;
+
+
+
+}
+.goal2{
+width:500px;
+height:300px;
+border: 1px solid white   ;
+background-color:white;
+  align-items:center;
+  justify-content:center;
+
+
+
+}
+.goal3{
+display:none;
+}
+.goal4 {
+  display: none;
+}
+.batu {
+  width: 20px !important;
+  height: 20px !important;
+  object-fit: contain;
+  cursor: pointer;
+}
+.oil{
+    width:40px;
+    height:40px;
+
+}
+.protein{
+    width:40px;
+    height:40px;
+    
+}
+.protein3 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #00000080;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.protein4 {
+  width: 500px;
+  height: 300px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.protein2 {
+  display: none;
+}
