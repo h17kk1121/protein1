@@ -10,7 +10,7 @@ function Food({ math, setmath, anytime, setanytime, eat, seteat }) {
   const [randomFoods, setrandomFoods] = useState([]);
   const [tall, settall] = useState('');
   const [weight, setweight] = useState('');
-  const [type,settype]=useState([]);
+  
 
 const [protein2, setprotein2] = useState('');
 const [proteinClass, setproteinClass] = useState(false);
@@ -44,7 +44,7 @@ const par=math
 
         setmath([...math, { ...eat, check: false, protein: false }]);
           seteat({ name: '', count: '' });
-          setanytime([...anytime, { name: eat.name, count: eat.count, proteinCount: 0 ,type: type }]);
+          setanytime([...anytime, { name: eat.name, count: eat.count, proteinCount: 0 }]);
         }}
       >
         保存
@@ -254,7 +254,8 @@ setprotein2('');
                 setreal2(true);
               }}
             />
-            <select onChange={(e) => settype(e.target.value)}>
+       <select  value={menu.type || ''} onChange={(e) => setanytime(anytime.map((menu1) =>menu==menu1 ? {...menu1, type: e.target.value} : menu1))}
+>
          <option value="主食">主食</option>
     <option value="主菜">主菜</option>
   <option value="副菜">副菜</option>
@@ -344,14 +345,12 @@ setprotein2('');
           let proteinTotal = 0;
 
           random.forEach((menu) => {
+            
         if (
+          
   total + Number(menu.count) <= Number(goal) &&
   proteinTotal + Number(menu.proteinCount) <= Number(weight) * 2
-&&selected.filter((item)=>item.type==='主食').length<1&&selected.filter((item)=>item.type==='主菜').length<1&&
-selected.filter((item)=>item.type==='副菜').length<1&&
-selected.filter((item)=>item.type==='汁物').length<1&&
-selected.filter((item)=>item.type==='乳製品').length<=0&&
-selected.filter((item)=>item.type==='果物').length<=0
+&& selected.filter((item) => item.type === menu.type).length < 1
 ) {
   selected.push(menu);
   total += Number(menu.count);
@@ -362,9 +361,10 @@ selected.filter((item)=>item.type==='果物').length<=0
 
 
           
-
+if (selected.filter((item)=>item.type==='主食').length === 1 && selected.filter((item)=>item.type==='主菜').length === 1 &&
+selected.filter((item)=>item.type==='副菜').length === 1 ){
           setrandomFoods(selected);
-        }}
+        }}}
       >
         選択
       </button>
