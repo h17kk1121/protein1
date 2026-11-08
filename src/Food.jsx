@@ -12,16 +12,7 @@ function Food({ math, setmath, anytime, setanytime, eat, seteat }) {
   const [weight, setweight] = useState('');
   
 
-const [protein2, setprotein2] = useState('');
-const [proteinClass, setproteinClass] = useState(false);
-const [oil, setoil] = useState(false);
-const protein3=anytime.map((menu)=>menu.proteinCount);
-const par=math
-          .filter((menu) => menu.check)
-          .reduce((total, menu) => total + Number(menu.count), 0)
 
-  return (
-    <div>
       <h2>本日の食事内容</h2>
 
       <input
