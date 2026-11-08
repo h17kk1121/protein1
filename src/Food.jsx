@@ -1,74 +1,63 @@
+import "./App.css";
+import { useState, useEffect } from 'react';
+import Food from './Food';
+import Training from './Training';
 
-      
-        type="text"
-        value={weight}
-        onChange={(e)=>setweight(e.target.value)}></input>
+function App() {
+const [math, setmath] = useState(() => {
+const data = localStorage.getItem("math");
+return data ? JSON.parse(data) : [];
+});
 
+const [eat, seteat] = useState(() => {
+  const data = localStorage.getItem("eat");
+  return data ? JSON.parse(data) : { name: '', count: '' };
+});
 
-          <input
-            type="number"
-            value={goal}
-            onChange={(e) => setgoal(e.target.value)}
-            placeholder="目標を入力してください"
-          />
-          </div>
-        
-       
+const [anytime, setanytime] = useState(() => {
+const data = localStorage.getItem("anytime");
+return data ? JSON.parse(data) : [];
+});
 
+useEffect(() => {
+localStorage.setItem("math", JSON.stringify(math));
+}, [math]);
 
+useEffect(() => {
+localStorage.setItem("anytime", JSON.stringify(anytime));
+}, [anytime]);
+useEffect(() => {
+localStorage.setItem("math", JSON.stringify(math));
+}, [math]);
 
-          <button onClick={() => setgoal2(true)}>設定</button>
-        </section>
-      </div>
+useEffect(() => {
+localStorage.setItem("eat", JSON.stringify(eat));
+}, [eat]);
 
-      <h2>食事選択</h2>
- 
-      <button
-        onClick={() => {
-          const foods = anytime.filter((menu) => menu.name !== '');
-
-          const random = [...foods].sort(() => Math.random() - 0.5);
-          const selected = [];
-          let total = 0;
-          let proteinTotal = 0;
-
-          random.forEach((menu) => {
-            
-        if (
-          
-  total + Number(menu.count) <= Number(goal) &&
-  proteinTotal + Number(menu.proteinCount) <= Number(weight) * 2
-&& selected.filter((item) => item.type === menu.type).length < 1
-) {
-  selected.push(menu);
-  total += Number(menu.count);
-  proteinTotal += Number(menu.proteinCount);
+return ( <div> <h1>ムキムキ日記</h1>
 
 
-}});
+  <Food
+    math={math}
+    setmath={setmath}
+    anytime={anytime}
+    setanytime={setanytime}
+    eat={eat}
+    seteat={seteat}
+  />
+
+  <Training
+    math={math}
+    setmath={setmath}
+    anytime={anytime}
+    setanytime={setanytime}
+    eat={eat}
+    seteat={seteat}
+  />
+</div>
 
 
-          
-if (selected.filter((item)=>item.type==='主食').length === 1 && selected.filter((item)=>item.type==='主菜').length === 1 &&
-selected.filter((item)=>item.type==='副菜').length === 1 ){
-          setrandomFoods(selected);
-        }}}
-      >
-        選択
-      </button>
-
-   {randomFoods.map((menu, index) => (
-  <div key={index}>
-    <p>{menu.name}: {menu.count}</p>
-  <p>プロテイン: {menu.proteinCount}g</p>
-  
-
-
-
-  </div>
-))}
-    </div>
-  );
+);
 }
 
-export default Food;
+export default App;
