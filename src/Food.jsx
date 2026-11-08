@@ -8,6 +8,9 @@ function Food({ math, setmath, anytime, setanytime, eat, seteat }) {
   const [goal, setgoal] = useState(0);
   const [goal2, setgoal2] = useState(false);
   const [randomFoods, setrandomFoods] = useState([]);
+  const [tall, settall] = useState('');
+  const [weight, setweight] = useState('');
+  const [type,settype]=useState([]);
 
 const [protein2, setprotein2] = useState('');
 const [proteinClass, setproteinClass] = useState(false);
@@ -41,7 +44,7 @@ const par=math
 
         setmath([...math, { ...eat, check: false, protein: false }]);
           seteat({ name: '', count: '' });
-          setanytime([...anytime, { name: eat.name, count: eat.count, proteinCount: 0 }]);
+          setanytime([...anytime, { name: eat.name, count: eat.count, proteinCount: 0 ,type: type }]);
         }}
       >
         保存
@@ -116,8 +119,7 @@ setmath(
 );
 setproteinClass(false);
 setprotein2('');
-      setproteinClass(false);
-      setprotein2('');
+ 
 
       setanytime(
   anytime.map((item) =>
@@ -252,8 +254,21 @@ setprotein2('');
                 setreal2(true);
               }}
             />
+            <select onChange={(e) => settype(e.target.value)}>
+         <option value="主食">主食</option>
+    <option value="主菜">主菜</option>
+  <option value="副菜">副菜</option>
+  <option value="汁物">汁物</option>
+  <option value="乳製品">乳製品</option>
+  <option value="果物">果物</option>
+          
+        </select>
+
+
           </div>
         ))}
+
+   
 
       {real2 && (
         <div className="warning">
@@ -284,19 +299,41 @@ setprotein2('');
         <section className={goal2 ? 'goal3' : 'goal2'}>
           <h2>目標を決めよう</h2>
 
+        <div className="set">
+
+        <input
+
+        type="text"
+        value={tall}
+        onChange={(e)=>settall(e.target.value)}>
+                  </input>
+
+            
+        <input
+      
+        type="text"
+        value={weight}
+        onChange={(e)=>setweight(e.target.value)}></input>
+
+
           <input
             type="number"
             value={goal}
             onChange={(e) => setgoal(e.target.value)}
             placeholder="目標を入力してください"
           />
+          </div>
+        
+       
+
+
 
           <button onClick={() => setgoal2(true)}>設定</button>
         </section>
       </div>
 
       <h2>食事選択</h2>
-
+ 
       <button
         onClick={() => {
           const foods = anytime.filter((menu) => menu.name !== '');
@@ -304,13 +341,27 @@ setprotein2('');
           const random = [...foods].sort(() => Math.random() - 0.5);
           const selected = [];
           let total = 0;
+          let proteinTotal = 0;
 
           random.forEach((menu) => {
-            if (total + Number(menu.count) <= Number(goal)) {
-              selected.push(menu);
-              total += Number(menu.count);
-            }
-          });
+        if (
+  total + Number(menu.count) <= Number(goal) &&
+  proteinTotal + Number(menu.proteinCount) <= Number(weight) * 2
+&&selected.filter((item)=>item.type==='主食').length<1&&selected.filter((item)=>item.type==='主菜').length<1&&
+selected.filter((item)=>item.type==='副菜').length<1&&
+selected.filter((item)=>item.type==='汁物').length<1&&
+selected.filter((item)=>item.type==='乳製品').length<=0&&
+selected.filter((item)=>item.type==='果物').length<=0
+) {
+  selected.push(menu);
+  total += Number(menu.count);
+  proteinTotal += Number(menu.proteinCount);
+
+
+}});
+
+
+          
 
           setrandomFoods(selected);
         }}
@@ -322,8 +373,10 @@ setprotein2('');
   <div key={index}>
     <p>{menu.name}: {menu.count}</p>
   <p>プロテイン: {menu.proteinCount}g</p>
+  
 
- 
+
+
   </div>
 ))}
     </div>
