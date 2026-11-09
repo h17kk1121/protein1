@@ -51,13 +51,15 @@ const par=math
       </button>
 
       {math.map((menu, index) => (
-        <div key={index}>
+        <div className='menu'>
+          <div >
           <p>
             {menu.name}：{menu.count}キロカロリー
           </p>
           <p>
             プロテイン: {menu.proteinCount}g
           </p>
+          </div>
 
           <img
             className="batu"
@@ -212,7 +214,7 @@ setprotein2('');
       {anytime
         .filter((menu) => menu.name !== '' || menu.count !== '')
         .map((menu, index) => (
-          <div key={index}>
+          <div className='menu'>
       
   <p>{menu.name}: {menu.count}</p>
           <p>プロテイン: {menu.proteinCount}g</p>
@@ -333,7 +335,7 @@ setprotein2('');
         </section>
       </div>
 
-      <h2>食事選択</h2>
+      <h2>自動食事選択</h2>
  
       <button
         onClick={() => {
