@@ -151,3 +151,13 @@ display:none;
 .par7, .par8, .par9, .par10, .par11, .par12, .par13 {
   transition: width 0.5s ease-in-out;
 }
+.set{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+    flex-direction: column;
+}
+.menu{
+  margin: 15px;
+
+}
