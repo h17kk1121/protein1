@@ -15,10 +15,19 @@ function Food({ math, setmath, anytime, setanytime, eat, seteat }) {
 const [protein2, setprotein2] = useState('');
 const [proteinClass, setproteinClass] = useState(false);
 const [oil, setoil] = useState(false);
+const [oil1,setoil1]=useState(0)
+const [carbs,setcarbs]=useState(false)
+const [carbs1,setcarbs1]=useState(0)
 const protein3=anytime.map((menu)=>menu.proteinCount);
 const par=math
           .filter((menu) => menu.check)
           .reduce((total, menu) => total + Number(menu.count), 0)
+const par1= math
+    .filter((menu) => menu.check === true)
+    .reduce((total, menu) => total + Number(menu.proteinCount), 0)   
+const par2=math.filter((e)=>e.check==true).reduce((total,menu)=>total+Number(menu.oilcount),0)
+const par3=math.filter((e)=>e.check==true).reduce((total,menu)=>total+Number(menu.carbscount),0)
+const allpar = par1 * 4 + par2 * 9 + par3 * 4;
 
   return (
     <div>
@@ -138,52 +147,64 @@ setprotein2('');
 )}
           <img className='oil' src="\picture\ダウンロード (1).webp" alt="" 
           onClick={() => setoil(true)}/>
+    {oil ? (
+      <div className='oil1'>
+    
+        <div className='oil2'>
+          <h2>脂質を入力</h2>
           
+          <input type="number" 
+          value={oil1}
+          onChange={(e)=>{setoil1(e.target.value);
+          setmath(math.map((item)=>item==menu ? { ...item, oilcount: e.target.value }
+        : item
+    )
+  );
+}}
+          />
+          <button onClick={()=>{setoil(false);setoil1('')}}>
+            保存
+            </button> 
+        
+          </div>
+              </div> 
+    )
+  : <div className='oil3'></div> 
+  
+  }
+  <img src='\picture\nutrientes-carbohydrate-500x375.png' className='carbs' onClick={()=>setcarbs(true)}></img> 
+  {carbs ? (
+      <div className='oil1'>
+    
+        <div className='oil2'>
+          <h2>炭水化物を入力</h2>
+          
+          <input type="number" 
+          value={carbs1}
+          onChange={(e)=>{setcarbs1(e.target.value);
+          setmath(math.map((item)=>item==menu  ? { ...item, carbscount: e.target.value }
+        : item
+    )
+  );
+}}
+          />
+          <button onClick={()=>{setcarbs(false);
+        setcarbs1('')}}>
+            保存
+            </button> 
+        
+          </div>
+              </div> 
+    )
+  : <div className='carbs3'></div> 
+  
+  }
 
 
-        </div>
-      ))}
-
-      <p>
-        合計：{par}
-      </p>
-       <p>
-  プロテイン：
-  {math
-    .filter((menu) => menu.check === true)
-    .reduce((total, current) => total + Number(current.proteinCount), 0)}
-  g
-</p>
 
 
 
-
-  <div className="par">
-    <div className="parx">
-  <div className={
-  par === 0 || goal === 0 ? '' :
-  par / goal <= 0.1 ? 'par1' :
-  par / goal <= 0.2 ? 'par2' :
-  par / goal <= 0.3 ? 'par3' :
-  par / goal <= 0.4 ? 'par4' :
-  par / goal <= 0.5 ? 'par5' :
-  par / goal <= 0.6 ? 'par6' :
-  par / goal <= 0.7 ? 'par7' :
-  par / goal <= 0.8 ? 'par8' :
-  par / goal <= 0.9 ? 'par9' :
-  par / goal < 1 ? 'par10' :
-  par / goal === 1 ? 'par11' :
-  par / goal <= 1.1 ? 'par12':
-  par / goal > 1.2 && 'par13'
-}>
-</div></div></div>
-      {math
-        .filter((menu) => menu.check)
-        .reduce((total, menu) => total + Number(menu.count), 0) >= goal
-        ? <p>これ以上食べたら太るけど筋肉増！</p>
-        : <p>痩せるけど筋肉減</p>
-      }
-
+          
       {real && (
         <div className="warning">
           <p>本当に削除する？</p>
@@ -208,6 +229,67 @@ setprotein2('');
           </button>
         </div>
       )}
+          
+
+
+        </div>
+      ))}
+
+      <p>
+        合計：{par}
+      </p>
+       <p>
+  プロテイン：
+  {par1}
+  g
+</p>
+
+
+
+<h2>総カロリーバー</h2>
+  <div className="par">
+    <div className="parx">
+  <div className={
+  par === 0 || goal === 0 ? '' :
+  par / goal <= 0.1 ? 'par1' :
+  par / goal <= 0.2 ? 'par2' :
+  par / goal <= 0.3 ? 'par3' :
+  par / goal <= 0.4 ? 'par4' :
+  par / goal <= 0.5 ? 'par5' :
+  par / goal <= 0.6 ? 'par6' :
+  par / goal <= 0.7 ? 'par7' :
+  par / goal <= 0.8 ? 'par8' :
+  par / goal <= 0.9 ? 'par9' :
+  par / goal < 1 ? 'par10' :
+  par / goal === 1 ? 'par11' :
+  par / goal <= 1.1 ? 'par12':
+  par / goal > 1.2 && 'par13'
+}>
+</div></div></div>
+      {par >= goal
+        ? <p>これ以上食べたら太るけど筋肉増！</p>
+        : <p>痩せるけど筋肉減</p>
+      }
+
+<h2>PFCバランス円グラフ</h2>
+<div className="circle">
+      <div
+  className="circle1"
+  style={{
+    background:  allpar === 0
+    ? 'conic-gradient(gray 0% 100%)'
+    :
+    `conic-gradient(
+      red 0% ${(par1*4 /allpar)* 100}% ,
+      blue  ${(par1*4 /allpar)* 100}% ${((par2*9+par1*4) / allpar)* 100}% ,
+      green ${((par2*9+par1*4 )/ allpar)* 100}%  100%
+    )`
+  }}
+></div></div>
+  
+
+
+
 
       <h2>今までの食事</h2>
 
@@ -273,30 +355,6 @@ setprotein2('');
 
    
 
-      {real2 && (
-        <div className="warning">
-          <p>本当に削除する？</p>
-
-          <button
-            onClick={() => {
-              setanytime(anytime.filter((item) => item !== selectMenu2));
-              setreal2(false);
-              setselectMenu2(null);
-            }}
-          >
-            削除
-          </button>
-
-          <button
-            onClick={() => {
-              setreal2(false);
-              setselectMenu2(null);
-            }}
-          >
-            いいえ
-          </button>
-        </div>
-      )}
 
       <div className={goal2 ? 'goal4' : 'goal'}>
         <section className={goal2 ? 'goal3' : 'goal2'}>
