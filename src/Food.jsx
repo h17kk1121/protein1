@@ -59,14 +59,16 @@ const allpar = par1 * 4 + par2 * 9 + par3 * 4;
         保存
       </button>
 
-      {math.map((menu, index) => (
+      {math.map((menu) => (
         <div className='menu'>
           <div >
           <p>
             {menu.name}：{menu.count}キロカロリー
           </p>
           <p>
-            プロテイン: {menu.proteinCount}g
+            たんぱく質: {menu.proteinCount}g
+            脂質:{menu.oilcount}
+            炭水化物:{menu.carbscount}
           </p>
           </div>
 
@@ -160,6 +162,7 @@ setprotein2('');
         : item
     )
   );
+  setanytime(math.map((item)=>item=menu ? {...item,oilcount:e.target.value}:item))
 }}
           />
           <button onClick={()=>{setoil(false);setoil1('')}}>
@@ -186,6 +189,7 @@ setprotein2('');
         : item
     )
   );
+    setanytime(math.map((item)=>item=menu ? {...item,carbscount:e.target.value}:item))
 }}
           />
           <button onClick={()=>{setcarbs(false);
@@ -299,7 +303,10 @@ setprotein2('');
           <div className='menu'>
       
   <p>{menu.name}: {menu.count}</p>
-          <p>プロテイン: {menu.proteinCount}g</p>
+          <p>プロテイン: {menu.proteinCount}g
+               脂質:{menu.oilcount}
+            炭水化物:{menu.carbscount}
+            </p>
             <input
               type="checkbox"
               checked={math.some(
