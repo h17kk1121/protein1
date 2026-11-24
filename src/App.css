@@ -207,3 +207,48 @@ display:none;
   .carbs3{
     display: none;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.memo{
+  width:40px;
+  height:40px;
+}
+  .memo1{
+    top: 0;
+    left:0;
+    display:flex;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    background-color:#00000080; 
+    width: 100%;
+    height: 100%;
+
+  }
+  .memo2{
+    width:500px;
+   height: 350px;
+   display: flex;
+   background-color: #ffffff;
+     align-items: center;
+    justify-content: center;
+   
+  }
+  .memoc{
+    display: none;
+  }
